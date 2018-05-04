@@ -1,0 +1,1423 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Seeds\_Project}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{c+c1}{\PYZsh{} DOMAIN : Botany/Seeds/Wheat/kernel/Agriculture}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{c+c1}{\PYZsh{} PROBLEM STATEMENT :  7 features (Input); Types/Classes of wheat (Output)  }
+          \PY{c+c1}{\PYZsh{}  Clustering/Classification}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{c+c1}{\PYZsh{} DATA : 70 samples of each class; (210,7) ;  Data characterization; }
+          \PY{c+c1}{\PYZsh{} Pair plot; Distribution plots; Box plots;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{c+c1}{\PYZsh{} METRIC :  Clustering (BIC/Silhoutte score);  Classification (accuracy, f\PYZhy{}score)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{c+c1}{\PYZsh{} SOLUTION PROPOSAL :}
+          \PY{c+c1}{\PYZsh{}   from sklearn.linear\PYZus{}model import LogisticRegression(for classification model)}
+          \PY{c+c1}{\PYZsh{}    k\PYZhy{}means   (Clustering)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{c+c1}{\PYZsh{} BENCHMARK : Assuming that all datapoints belong to the single }
+          \PY{c+c1}{\PYZsh{} cluster (akin to null hypothesis), we can ask the}
+          \PY{c+c1}{\PYZsh{} question if there is indeed more than one cluster}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{c+c1}{\PYZsh{} PLAN :  }
+          \PY{c+c1}{\PYZsh{}  1.  Get \PYZam{} Load the data  (handlethe headers and separators)}
+          \PY{c+c1}{\PYZsh{}  2.  visualize the data}
+          \PY{c+c1}{\PYZsh{}  3.  Benchmark}
+          \PY{c+c1}{\PYZsh{}          from sklearn.dummy  import DummyClassifier}
+          \PY{c+c1}{\PYZsh{}  4.   Model development  (Backward selection vs Forward selection)}
+          \PY{c+c1}{\PYZsh{}         Backward selection = Start with ALL features and remove what is the }
+          \PY{c+c1}{\PYZsh{}                             least useful in predicting the type of wheat}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{o}{*}
+          
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{import} \PY{n}{scatter}
+          
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{SEEDS\PYZus{}DATA\PYZus{}URL} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/00236/seeds\PYZus{}dataset.txt}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{SEEDS\PYZus{}DATA\PYZus{}URL}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} this command can pull the data directly from the URL.  }
+          \PY{c+c1}{\PYZsh{}  However the data are not comma separated.}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:}      15.26\textbackslash{}t14.84\textbackslash{}t0.871\textbackslash{}t5.763\textbackslash{}t3.312\textbackslash{}t2.221\textbackslash{}t5.22\textbackslash{}t1
+          0    14.88\textbackslash{}t14.57\textbackslash{}t0.8811\textbackslash{}t5.554\textbackslash{}t3.333\textbackslash{}t1.018\textbackslash{}t4.9{\ldots}
+          1    14.29\textbackslash{}t14.09\textbackslash{}t0.905\textbackslash{}t5.291\textbackslash{}t3.337\textbackslash{}t2.699\textbackslash{}t4.82{\ldots}
+          2    13.84\textbackslash{}t13.94\textbackslash{}t0.8955\textbackslash{}t5.324\textbackslash{}t3.379\textbackslash{}t2.259\textbackslash{}t4.8{\ldots}
+          3    16.14\textbackslash{}t14.99\textbackslash{}t0.9034\textbackslash{}t5.658\textbackslash{}t3.562\textbackslash{}t1.355\textbackslash{}t5.1{\ldots}
+          4    14.38\textbackslash{}t14.21\textbackslash{}t0.8951\textbackslash{}t5.386\textbackslash{}t3.312\textbackslash{}t2.462\textbackslash{}t4.9{\ldots}
+          5    14.69\textbackslash{}t14.49\textbackslash{}t0.8799\textbackslash{}t5.563\textbackslash{}t3.259\textbackslash{}t3.586\textbackslash{}t5.2{\ldots}
+          6      14.11\textbackslash{}t14.1\textbackslash{}t0.8911\textbackslash{}t5.42\textbackslash{}t3.302\textbackslash{}t2.7\textbackslash{}t\textbackslash{}t5\textbackslash{}t\textbackslash{}t1
+          7    16.63\textbackslash{}t15.46\textbackslash{}t0.8747\textbackslash{}t6.053\textbackslash{}t3.465\textbackslash{}t2.04\textbackslash{}t5.87{\ldots}
+          8    16.44\textbackslash{}t15.25\textbackslash{}t0.888\textbackslash{}t5.884\textbackslash{}t3.505\textbackslash{}t1.969\textbackslash{}t5.53{\ldots}
+          9    15.26\textbackslash{}t14.85\textbackslash{}t0.8696\textbackslash{}t5.714\textbackslash{}t3.242\textbackslash{}t4.543\textbackslash{}t5.3{\ldots}
+          10   14.03\textbackslash{}t14.16\textbackslash{}t0.8796\textbackslash{}t5.438\textbackslash{}t3.201\textbackslash{}t1.717\textbackslash{}t5.0{\ldots}
+          11   13.89\textbackslash{}t14.02\textbackslash{}t0.888\textbackslash{}t5.439\textbackslash{}t3.199\textbackslash{}t3.986\textbackslash{}t4.73{\ldots}
+          12   13.78\textbackslash{}t14.06\textbackslash{}t0.8759\textbackslash{}t5.479\textbackslash{}t3.156\textbackslash{}t3.136\textbackslash{}t4.8{\ldots}
+          13   13.74\textbackslash{}t14.05\textbackslash{}t0.8744\textbackslash{}t5.482\textbackslash{}t3.114\textbackslash{}t2.932\textbackslash{}t4.8{\ldots}
+          14   14.59\textbackslash{}t14.28\textbackslash{}t0.8993\textbackslash{}t5.351\textbackslash{}t3.333\textbackslash{}t4.185\textbackslash{}t4.7{\ldots}
+          15   13.99\textbackslash{}t13.83\textbackslash{}t0.9183\textbackslash{}t5.119\textbackslash{}t3.383\textbackslash{}t5.234\textbackslash{}t4.7{\ldots}
+          16   15.69\textbackslash{}t14.75\textbackslash{}t0.9058\textbackslash{}t5.527\textbackslash{}t3.514\textbackslash{}t1.599\textbackslash{}t5.0{\ldots}
+          17   14.7\textbackslash{}t14.21\textbackslash{}t0.9153\textbackslash{}t5.205\textbackslash{}t3.466\textbackslash{}t1.767\textbackslash{}t4.64{\ldots}
+          18   12.72\textbackslash{}t13.57\textbackslash{}t0.8686\textbackslash{}t5.226\textbackslash{}t3.049\textbackslash{}t4.102\textbackslash{}t4.9{\ldots}
+          19   14.16\textbackslash{}t14.4\textbackslash{}t0.8584\textbackslash{}t5.658\textbackslash{}t3.129\textbackslash{}t3.072\textbackslash{}t5.17{\ldots}
+          20   14.11\textbackslash{}t14.26\textbackslash{}t0.8722\textbackslash{}t5.52\textbackslash{}t3.168\textbackslash{}t2.688\textbackslash{}t5.21{\ldots}
+          21   15.88\textbackslash{}t14.9\textbackslash{}t0.8988\textbackslash{}t5.618\textbackslash{}t3.507\textbackslash{}t0.7651\textbackslash{}t5.0{\ldots}
+          22   12.08\textbackslash{}t13.23\textbackslash{}t0.8664\textbackslash{}t5.099\textbackslash{}t2.936\textbackslash{}t1.415\textbackslash{}t4.9{\ldots}
+          23   15.01\textbackslash{}t14.76\textbackslash{}t0.8657\textbackslash{}t5.789\textbackslash{}t3.245\textbackslash{}t1.791\textbackslash{}t5.0{\ldots}
+          24   16.19\textbackslash{}t15.16\textbackslash{}t0.8849\textbackslash{}t5.833\textbackslash{}t3.421\textbackslash{}t0.903\textbackslash{}t5.3{\ldots}
+          25   13.02\textbackslash{}t13.76\textbackslash{}t0.8641\textbackslash{}t5.395\textbackslash{}t3.026\textbackslash{}t3.373\textbackslash{}t4.8{\ldots}
+          26   12.74\textbackslash{}t13.67\textbackslash{}t0.8564\textbackslash{}t5.395\textbackslash{}t2.956\textbackslash{}t2.504\textbackslash{}t4.8{\ldots}
+          27   14.11\textbackslash{}t14.18\textbackslash{}t0.882\textbackslash{}t5.541\textbackslash{}t3.221\textbackslash{}t2.754\textbackslash{}t5.03{\ldots}
+          28   13.45\textbackslash{}t14.02\textbackslash{}t0.8604\textbackslash{}t5.516\textbackslash{}t3.065\textbackslash{}t3.531\textbackslash{}t5.0{\ldots}
+          29   13.16\textbackslash{}t13.82\textbackslash{}t0.8662\textbackslash{}t5.454\textbackslash{}t2.975\textbackslash{}t0.8551\textbackslash{}t5{\ldots}
+          ..                                                 {\ldots}
+          179  11.41\textbackslash{}t12.95\textbackslash{}t0.856\textbackslash{}t5.09\textbackslash{}t2.775\textbackslash{}t4.957\textbackslash{}t4.825\textbackslash{}t3
+          180  12.46\textbackslash{}t13.41\textbackslash{}t0.8706\textbackslash{}t5.236\textbackslash{}t3.017\textbackslash{}t4.987\textbackslash{}t5.1{\ldots}
+          181  12.19\textbackslash{}t13.36\textbackslash{}t0.8579\textbackslash{}t5.24\textbackslash{}t2.909\textbackslash{}t4.857\textbackslash{}t5.15{\ldots}
+          182  11.65\textbackslash{}t13.07\textbackslash{}t0.8575\textbackslash{}t5.108\textbackslash{}t2.85\textbackslash{}t5.209\textbackslash{}t5.13{\ldots}
+          183  12.89\textbackslash{}t13.77\textbackslash{}t0.8541\textbackslash{}t5.495\textbackslash{}t3.026\textbackslash{}t6.185\textbackslash{}t5.3{\ldots}
+          184  11.56\textbackslash{}t13.31\textbackslash{}t0.8198\textbackslash{}t5.363\textbackslash{}t2.683\textbackslash{}t4.062\textbackslash{}t5.1{\ldots}
+          185  11.81\textbackslash{}t13.45\textbackslash{}t0.8198\textbackslash{}t5.413\textbackslash{}t2.716\textbackslash{}t4.898\textbackslash{}t5.3{\ldots}
+          186  10.91\textbackslash{}t12.8\textbackslash{}t0.8372\textbackslash{}t5.088\textbackslash{}t2.675\textbackslash{}t4.179\textbackslash{}t4.95{\ldots}
+          187  11.23\textbackslash{}t12.82\textbackslash{}t0.8594\textbackslash{}t5.089\textbackslash{}t2.821\textbackslash{}t7.524\textbackslash{}t4.9{\ldots}
+          188  10.59\textbackslash{}t12.41\textbackslash{}t0.8648\textbackslash{}t4.899\textbackslash{}t2.787\textbackslash{}t4.975\textbackslash{}t4.7{\ldots}
+          189  10.93\textbackslash{}t12.8\textbackslash{}t0.839\textbackslash{}t5.046\textbackslash{}t2.717\textbackslash{}t5.398\textbackslash{}t5.045\textbackslash{}t3
+          190  11.27\textbackslash{}t12.86\textbackslash{}t0.8563\textbackslash{}t5.091\textbackslash{}t2.804\textbackslash{}t3.985\textbackslash{}t5.0{\ldots}
+          191  11.87\textbackslash{}t13.02\textbackslash{}t0.8795\textbackslash{}t5.132\textbackslash{}t2.953\textbackslash{}t3.597\textbackslash{}t5.1{\ldots}
+          192  10.82\textbackslash{}t12.83\textbackslash{}t0.8256\textbackslash{}t5.18\textbackslash{}t2.63\textbackslash{}t4.853\textbackslash{}t5.089\textbackslash{}t3
+          193  12.11\textbackslash{}t13.27\textbackslash{}t0.8639\textbackslash{}t5.236\textbackslash{}t2.975\textbackslash{}t4.132\textbackslash{}t5.0{\ldots}
+          194   12.8\textbackslash{}t13.47\textbackslash{}t0.886\textbackslash{}t5.16\textbackslash{}t3.126\textbackslash{}t4.873\textbackslash{}t4.914\textbackslash{}t3
+          195  12.79\textbackslash{}t13.53\textbackslash{}t0.8786\textbackslash{}t5.224\textbackslash{}t3.054\textbackslash{}t5.483\textbackslash{}t4.9{\ldots}
+          196  13.37\textbackslash{}t13.78\textbackslash{}t0.8849\textbackslash{}t5.32\textbackslash{}t3.128\textbackslash{}t4.67\textbackslash{}t5.091\textbackslash{}t3
+          197  12.62\textbackslash{}t13.67\textbackslash{}t0.8481\textbackslash{}t5.41\textbackslash{}t2.911\textbackslash{}t3.306\textbackslash{}t5.23{\ldots}
+          198  12.76\textbackslash{}t13.38\textbackslash{}t0.8964\textbackslash{}t5.073\textbackslash{}t3.155\textbackslash{}t2.828\textbackslash{}t4.8{\ldots}
+          199  12.38\textbackslash{}t13.44\textbackslash{}t0.8609\textbackslash{}t5.219\textbackslash{}t2.989\textbackslash{}t5.472\textbackslash{}t5.0{\ldots}
+          200  12.67\textbackslash{}t13.32\textbackslash{}t0.8977\textbackslash{}t4.984\textbackslash{}t3.135\textbackslash{}t2.3\textbackslash{}t\textbackslash{}t4.7{\ldots}
+          201  11.18\textbackslash{}t12.72\textbackslash{}t0.868\textbackslash{}t5.009\textbackslash{}t2.81\textbackslash{}t4.051\textbackslash{}t4.828\textbackslash{}t3
+          202   12.7\textbackslash{}t13.41\textbackslash{}t0.8874\textbackslash{}t5.183\textbackslash{}t3.091\textbackslash{}t8.456\textbackslash{}t5\textbackslash{}t\textbackslash{}t3
+          203  12.37\textbackslash{}t13.47\textbackslash{}t0.8567\textbackslash{}t5.204\textbackslash{}t2.96\textbackslash{}t3.919\textbackslash{}t5.00{\ldots}
+          204  12.19\textbackslash{}t13.2\textbackslash{}t0.8783\textbackslash{}t5.137\textbackslash{}t2.981\textbackslash{}t3.631\textbackslash{}t4.87\textbackslash{}t3
+          205  11.23\textbackslash{}t12.88\textbackslash{}t0.8511\textbackslash{}t5.14\textbackslash{}t2.795\textbackslash{}t4.325\textbackslash{}t5.00{\ldots}
+          206  13.2\textbackslash{}t13.66\textbackslash{}t0.8883\textbackslash{}t5.236\textbackslash{}t3.232\textbackslash{}t8.315\textbackslash{}t5.05{\ldots}
+          207  11.84\textbackslash{}t13.21\textbackslash{}t0.8521\textbackslash{}t5.175\textbackslash{}t2.836\textbackslash{}t3.598\textbackslash{}t5.0{\ldots}
+          208  12.3\textbackslash{}t13.34\textbackslash{}t0.8684\textbackslash{}t5.243\textbackslash{}t2.974\textbackslash{}t5.637\textbackslash{}t5.06{\ldots}
+          
+          [209 rows x 1 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{n}{SEEDS\PYZus{}DATA\PYZus{}URL} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/00236/seeds\PYZus{}dataset.txt}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{n}{seeds\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{SEEDS\PYZus{}DATA\PYZus{}URL}\PY{p}{,}\PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{s+}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Perimeter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Compactness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Width}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Asymmetry Coefft}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Kernel Groove Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{seeds\PYZus{}df}
+          \PY{c+c1}{\PYZsh{} this improves the previous line with the \PYZdq{}separator\PYZdq{} function added}
+          \PY{c+c1}{\PYZsh{} Also the header line is clear}
+          \PY{c+c1}{\PYZsh{} Compactness = C = 4* pi*A/P\PYZca{}2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}152}]:}       Area  Perimeter  Compactness  Length  Width  Asymmetry Coefft  \textbackslash{}
+          0    15.26      14.84       0.8710   5.763  3.312            2.2210   
+          1    14.88      14.57       0.8811   5.554  3.333            1.0180   
+          2    14.29      14.09       0.9050   5.291  3.337            2.6990   
+          3    13.84      13.94       0.8955   5.324  3.379            2.2590   
+          4    16.14      14.99       0.9034   5.658  3.562            1.3550   
+          5    14.38      14.21       0.8951   5.386  3.312            2.4620   
+          6    14.69      14.49       0.8799   5.563  3.259            3.5860   
+          7    14.11      14.10       0.8911   5.420  3.302            2.7000   
+          8    16.63      15.46       0.8747   6.053  3.465            2.0400   
+          9    16.44      15.25       0.8880   5.884  3.505            1.9690   
+          10   15.26      14.85       0.8696   5.714  3.242            4.5430   
+          11   14.03      14.16       0.8796   5.438  3.201            1.7170   
+          12   13.89      14.02       0.8880   5.439  3.199            3.9860   
+          13   13.78      14.06       0.8759   5.479  3.156            3.1360   
+          14   13.74      14.05       0.8744   5.482  3.114            2.9320   
+          15   14.59      14.28       0.8993   5.351  3.333            4.1850   
+          16   13.99      13.83       0.9183   5.119  3.383            5.2340   
+          17   15.69      14.75       0.9058   5.527  3.514            1.5990   
+          18   14.70      14.21       0.9153   5.205  3.466            1.7670   
+          19   12.72      13.57       0.8686   5.226  3.049            4.1020   
+          20   14.16      14.40       0.8584   5.658  3.129            3.0720   
+          21   14.11      14.26       0.8722   5.520  3.168            2.6880   
+          22   15.88      14.90       0.8988   5.618  3.507            0.7651   
+          23   12.08      13.23       0.8664   5.099  2.936            1.4150   
+          24   15.01      14.76       0.8657   5.789  3.245            1.7910   
+          25   16.19      15.16       0.8849   5.833  3.421            0.9030   
+          26   13.02      13.76       0.8641   5.395  3.026            3.3730   
+          27   12.74      13.67       0.8564   5.395  2.956            2.5040   
+          28   14.11      14.18       0.8820   5.541  3.221            2.7540   
+          29   13.45      14.02       0.8604   5.516  3.065            3.5310   
+          ..     {\ldots}        {\ldots}          {\ldots}     {\ldots}    {\ldots}               {\ldots}   
+          180  11.41      12.95       0.8560   5.090  2.775            4.9570   
+          181  12.46      13.41       0.8706   5.236  3.017            4.9870   
+          182  12.19      13.36       0.8579   5.240  2.909            4.8570   
+          183  11.65      13.07       0.8575   5.108  2.850            5.2090   
+          184  12.89      13.77       0.8541   5.495  3.026            6.1850   
+          185  11.56      13.31       0.8198   5.363  2.683            4.0620   
+          186  11.81      13.45       0.8198   5.413  2.716            4.8980   
+          187  10.91      12.80       0.8372   5.088  2.675            4.1790   
+          188  11.23      12.82       0.8594   5.089  2.821            7.5240   
+          189  10.59      12.41       0.8648   4.899  2.787            4.9750   
+          190  10.93      12.80       0.8390   5.046  2.717            5.3980   
+          191  11.27      12.86       0.8563   5.091  2.804            3.9850   
+          192  11.87      13.02       0.8795   5.132  2.953            3.5970   
+          193  10.82      12.83       0.8256   5.180  2.630            4.8530   
+          194  12.11      13.27       0.8639   5.236  2.975            4.1320   
+          195  12.80      13.47       0.8860   5.160  3.126            4.8730   
+          196  12.79      13.53       0.8786   5.224  3.054            5.4830   
+          197  13.37      13.78       0.8849   5.320  3.128            4.6700   
+          198  12.62      13.67       0.8481   5.410  2.911            3.3060   
+          199  12.76      13.38       0.8964   5.073  3.155            2.8280   
+          200  12.38      13.44       0.8609   5.219  2.989            5.4720   
+          201  12.67      13.32       0.8977   4.984  3.135            2.3000   
+          202  11.18      12.72       0.8680   5.009  2.810            4.0510   
+          203  12.70      13.41       0.8874   5.183  3.091            8.4560   
+          204  12.37      13.47       0.8567   5.204  2.960            3.9190   
+          205  12.19      13.20       0.8783   5.137  2.981            3.6310   
+          206  11.23      12.88       0.8511   5.140  2.795            4.3250   
+          207  13.20      13.66       0.8883   5.236  3.232            8.3150   
+          208  11.84      13.21       0.8521   5.175  2.836            3.5980   
+          209  12.30      13.34       0.8684   5.243  2.974            5.6370   
+          
+               Kernel Groove Length  Target  
+          0                   5.220       1  
+          1                   4.956       1  
+          2                   4.825       1  
+          3                   4.805       1  
+          4                   5.175       1  
+          5                   4.956       1  
+          6                   5.219       1  
+          7                   5.000       1  
+          8                   5.877       1  
+          9                   5.533       1  
+          10                  5.314       1  
+          11                  5.001       1  
+          12                  4.738       1  
+          13                  4.872       1  
+          14                  4.825       1  
+          15                  4.781       1  
+          16                  4.781       1  
+          17                  5.046       1  
+          18                  4.649       1  
+          19                  4.914       1  
+          20                  5.176       1  
+          21                  5.219       1  
+          22                  5.091       1  
+          23                  4.961       1  
+          24                  5.001       1  
+          25                  5.307       1  
+          26                  4.825       1  
+          27                  4.869       1  
+          28                  5.038       1  
+          29                  5.097       1  
+          ..                    {\ldots}     {\ldots}  
+          180                 4.825       3  
+          181                 5.147       3  
+          182                 5.158       3  
+          183                 5.135       3  
+          184                 5.316       3  
+          185                 5.182       3  
+          186                 5.352       3  
+          187                 4.956       3  
+          188                 4.957       3  
+          189                 4.794       3  
+          190                 5.045       3  
+          191                 5.001       3  
+          192                 5.132       3  
+          193                 5.089       3  
+          194                 5.012       3  
+          195                 4.914       3  
+          196                 4.958       3  
+          197                 5.091       3  
+          198                 5.231       3  
+          199                 4.830       3  
+          200                 5.045       3  
+          201                 4.745       3  
+          202                 4.828       3  
+          203                 5.000       3  
+          204                 5.001       3  
+          205                 4.870       3  
+          206                 5.003       3  
+          207                 5.056       3  
+          208                 5.044       3  
+          209                 5.063       3  
+          
+          [210 rows x 8 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{n}{seeds\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}153}]:}     Area  Perimeter  Compactness  Length  Width  Asymmetry Coefft  \textbackslash{}
+          0  15.26      14.84       0.8710   5.763  3.312             2.221   
+          1  14.88      14.57       0.8811   5.554  3.333             1.018   
+          2  14.29      14.09       0.9050   5.291  3.337             2.699   
+          3  13.84      13.94       0.8955   5.324  3.379             2.259   
+          4  16.14      14.99       0.9034   5.658  3.562             1.355   
+          
+             Kernel Groove Length  Target  
+          0                 5.220       1  
+          1                 4.956       1  
+          2                 4.825       1  
+          3                 4.805       1  
+          4                 5.175       1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{n}{seeds\PYZus{}df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}154}]:} (210, 8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n}{seeds\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f8219166668>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{seeds\PYZus{}df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}156}]:} <seaborn.axisgrid.PairGrid at 0x7f8206fbf9b0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{c+c1}{\PYZsh{} the question : which individual feature and/or which combination of these features}
+          \PY{c+c1}{\PYZsh{}               is a good predictor of the target class?}
+          \PY{c+c1}{\PYZsh{}seeds\PYZus{}df.Area}
+          \PY{c+c1}{\PYZsh{}seeds\PYZus{}df.Perimeter}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{c+c1}{\PYZsh{}  Generating the array output for explicitly selected predictors and }
+          \PY{c+c1}{\PYZsh{}                 writing the array as a column output file}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{import} \PY{n+nn}{csv} 
+          
+          \PY{c+c1}{\PYZsh{},\PYZsq{}Perimeter\PYZsq{},\PYZsq{}Compactness\PYZsq{},\PYZsq{}Length\PYZsq{},\PYZsq{}Width\PYZsq{},\PYZsq{}Asymmetry Coefft\PYZsq{},}
+          \PY{c+c1}{\PYZsh{}\PYZsq{}Kernel Groove Length\PYZsq{}}
+          
+          \PY{n}{features} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Perimeter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Compactness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Width}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Asymmetry Coefft}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Kernel Groove Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{X} \PY{o}{=} \PY{n}{seeds\PYZus{}df}\PY{p}{[}\PY{n}{features}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{]}
+          \PY{n}{y} \PY{o}{=} \PY{n}{seeds\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{display}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          
+          \PY{n}{lr} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          \PY{n}{preds} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}  \PY{c+c1}{\PYZsh{} will output array with integer values.}
+          
+          \PY{c+c1}{\PYZsh{}display(preds)    }
+          \PY{n}{display}\PY{p}{(}\PY{n}{preds}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+          
+          \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+          \PY{n}{y}\PY{o}{.}\PY{n}{shape}
+          
+          \PY{c+c1}{\PYZsh{}plt.scatter(X,y)}
+          \PY{c+c1}{\PYZsh{}plt.xlabel(\PYZdq{}Predictor\PYZdq{})}
+          \PY{c+c1}{\PYZsh{}plt.ylabel(\PYZdq{}Target\PYZdq{})}
+          
+          \PY{n}{np}\PY{o}{.}\PY{n}{savetxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}file1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{preds}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+      Area  Perimeter  Compactness  Length  Width
+0    15.26      14.84       0.8710   5.763  3.312
+1    14.88      14.57       0.8811   5.554  3.333
+2    14.29      14.09       0.9050   5.291  3.337
+3    13.84      13.94       0.8955   5.324  3.379
+4    16.14      14.99       0.9034   5.658  3.562
+5    14.38      14.21       0.8951   5.386  3.312
+6    14.69      14.49       0.8799   5.563  3.259
+7    14.11      14.10       0.8911   5.420  3.302
+8    16.63      15.46       0.8747   6.053  3.465
+9    16.44      15.25       0.8880   5.884  3.505
+10   15.26      14.85       0.8696   5.714  3.242
+11   14.03      14.16       0.8796   5.438  3.201
+12   13.89      14.02       0.8880   5.439  3.199
+13   13.78      14.06       0.8759   5.479  3.156
+14   13.74      14.05       0.8744   5.482  3.114
+15   14.59      14.28       0.8993   5.351  3.333
+16   13.99      13.83       0.9183   5.119  3.383
+17   15.69      14.75       0.9058   5.527  3.514
+18   14.70      14.21       0.9153   5.205  3.466
+19   12.72      13.57       0.8686   5.226  3.049
+20   14.16      14.40       0.8584   5.658  3.129
+21   14.11      14.26       0.8722   5.520  3.168
+22   15.88      14.90       0.8988   5.618  3.507
+23   12.08      13.23       0.8664   5.099  2.936
+24   15.01      14.76       0.8657   5.789  3.245
+25   16.19      15.16       0.8849   5.833  3.421
+26   13.02      13.76       0.8641   5.395  3.026
+27   12.74      13.67       0.8564   5.395  2.956
+28   14.11      14.18       0.8820   5.541  3.221
+29   13.45      14.02       0.8604   5.516  3.065
+..     ...        ...          ...     ...    ...
+180  11.41      12.95       0.8560   5.090  2.775
+181  12.46      13.41       0.8706   5.236  3.017
+182  12.19      13.36       0.8579   5.240  2.909
+183  11.65      13.07       0.8575   5.108  2.850
+184  12.89      13.77       0.8541   5.495  3.026
+185  11.56      13.31       0.8198   5.363  2.683
+186  11.81      13.45       0.8198   5.413  2.716
+187  10.91      12.80       0.8372   5.088  2.675
+188  11.23      12.82       0.8594   5.089  2.821
+189  10.59      12.41       0.8648   4.899  2.787
+190  10.93      12.80       0.8390   5.046  2.717
+191  11.27      12.86       0.8563   5.091  2.804
+192  11.87      13.02       0.8795   5.132  2.953
+193  10.82      12.83       0.8256   5.180  2.630
+194  12.11      13.27       0.8639   5.236  2.975
+195  12.80      13.47       0.8860   5.160  3.126
+196  12.79      13.53       0.8786   5.224  3.054
+197  13.37      13.78       0.8849   5.320  3.128
+198  12.62      13.67       0.8481   5.410  2.911
+199  12.76      13.38       0.8964   5.073  3.155
+200  12.38      13.44       0.8609   5.219  2.989
+201  12.67      13.32       0.8977   4.984  3.135
+202  11.18      12.72       0.8680   5.009  2.810
+203  12.70      13.41       0.8874   5.183  3.091
+204  12.37      13.47       0.8567   5.204  2.960
+205  12.19      13.20       0.8783   5.137  2.981
+206  11.23      12.88       0.8511   5.140  2.795
+207  13.20      13.66       0.8883   5.236  3.232
+208  11.84      13.21       0.8521   5.175  2.836
+209  12.30      13.34       0.8684   5.243  2.974
+
+[210 rows x 5 columns]
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+(210,)
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+array([1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 2,
+       3, 1, 2, 3, 3, 1, 3, 3, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1,
+       3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 2, 1,
+       1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+       3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+       3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 1, 3, 1, 3, 1, 3, 3, 3, 3, 3,
+       1, 3, 3])
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{c+c1}{\PYZsh{}  Same as above.  But here we are making the list comprehension }
+          \PY{c+c1}{\PYZsh{}         to scan through the features}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{import} \PY{n+nn}{csv}
+          
+          \PY{n}{features} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Perimeter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Compactness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Asymmetry Coefft}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kernel Groove Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{features}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+          \PY{n}{new\PYZus{}prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{210}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{the new value of i is :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{before the iteration, the feature is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{n}{features}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{)}
+              \PY{c+c1}{\PYZsh{}seeds\PYZus{}df[(features[i])].hist(bins=100)}
+              \PY{n}{X} \PY{o}{=} \PY{n}{seeds\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{p}{(}\PY{n}{features}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{]}
+              \PY{n}{y} \PY{o}{=} \PY{n}{seeds\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+              \PY{n}{lr} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+              \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{}  How to get these individual plots rather than on the same graph}
+          \PY{c+c1}{\PYZsh{}  Also how to plot the logistic regression fit for these individual dataset ?}
+            
+              \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{p}{(}\PY{n}{features}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              
+              
+              \PY{n}{preds} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}  \PY{c+c1}{\PYZsh{} will output array with integer values.}
+              \PY{n}{new\PYZus{}prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{new\PYZus{}prediction}\PY{p}{,}\PY{n}{preds}\PY{p}{]}\PY{p}{)}  
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{after the iteration i =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+          
+            
+          
+          \PY{n}{display}\PY{p}{(}\PY{n}{new\PYZus{}prediction}\PY{p}{)}
+          
+          \PY{n}{np}\PY{o}{.}\PY{n}{savetxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output\PYZus{}1\PYZus{}individual\PYZus{}predictors.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{new\PYZus{}prediction}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                                   \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+'Compactness'
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+the new value of i is : 0
+before the iteration, the feature is: Area
+after the iteration i = 0
+
+the new value of i is : 1
+before the iteration, the feature is: Perimeter
+after the iteration i = 1
+
+the new value of i is : 2
+before the iteration, the feature is: Compactness
+after the iteration i = 2
+
+the new value of i is : 3
+before the iteration, the feature is: Length
+after the iteration i = 3
+
+the new value of i is : 4
+before the iteration, the feature is: Width
+after the iteration i = 4
+
+the new value of i is : 5
+before the iteration, the feature is: Asymmetry Coefft
+after the iteration i = 5
+
+the new value of i is : 6
+before the iteration, the feature is: Kernel Groove Length
+after the iteration i = 6
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+array([[ 0.,  0.,  0., ...,  0.,  0.,  0.],
+       [ 2.,  2.,  1., ...,  3.,  3.,  3.],
+       [ 2.,  2.,  3., ...,  3.,  3.,  3.],
+       ..., 
+       [ 2.,  2.,  2., ...,  2.,  3.,  3.],
+       [ 1.,  1.,  1., ...,  3.,  2.,  3.],
+       [ 1.,  1.,  1., ...,  1.,  1.,  1.]])
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{Predictors} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Perimeter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Compactness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Asymmetry Coeff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KG length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{Model\PYZus{}accuracy} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{80.48}\PY{p}{,}\PY{l+m+mf}{71.90}\PY{p}{,}\PY{l+m+mf}{50.95}\PY{p}{,}\PY{l+m+mf}{66.67}\PY{p}{,}\PY{l+m+mf}{72.86}\PY{p}{,}\PY{l+m+mf}{57.14}\PY{p}{,}\PY{l+m+mf}{60.48}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{c+c1}{\PYZsh{}  this bar graph shows the prediction accuracy when the predictor }
+          \PY{c+c1}{\PYZsh{}   variables are considered one by one in the Logistic regression model}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{Predictors}\PY{p}{,}\PY{n}{Model\PYZus{}accuracy}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MultiClass\PYZhy{}Logistic Regression:  Supervised Classification}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model Accuracy (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}Predictors\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{Predictors}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show} \PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{Predictors2} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 to F7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 to F6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 to F5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 to F4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 to F3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 to F2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1 Alone}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{Model\PYZus{}accuracy2} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{92.9}\PY{p}{,}\PY{l+m+mf}{91.4}\PY{p}{,}\PY{l+m+mf}{84.7}\PY{p}{,}\PY{l+m+mf}{84.7}\PY{p}{,}\PY{l+m+mf}{84.7}\PY{p}{,}\PY{l+m+mf}{84.7}\PY{p}{,}\PY{l+m+mf}{80.5}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{c+c1}{\PYZsh{}  this bar graph shows the prediction accuracy when the predictor variables }
+          \PY{c+c1}{\PYZsh{}      are considered in combnations in the Logistic regression model}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{Predictors2}\PY{p}{,}\PY{n}{Model\PYZus{}accuracy2}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MultiClass\PYZhy{}Logistic Regression:  Supervised Classification}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model Accuracy (}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}Predictor Combinations\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{Predictors2}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show} \PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}166}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{THIS IS THE END OF PHASE I \PYZhy{} WHERE THE ESSENTIAL LOGIC OF}
+          \PY{l+s+sd}{       DATA ANALYSIS WAS COMPLETED.}
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}166}]:} '\textbackslash{}nTHIS IS THE END OF PHASE I - WHERE THE ESSENTIAL LOGIC OF\textbackslash{}n       DATA ANALYSIS WAS COMPLETED.\textbackslash{}n'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} }
+          
+          \PY{l+s+sd}{IN THE PHASE II OF THE PROJECT, WE WILL FOCUS ON TWO MORE IMPROVEMENTS}
+          \PY{l+s+sd}{(a) train\PYZhy{}test (b) feature combinations}
+          \PY{l+s+sd}{Instead of fitting with all the data, here, we use the train\PYZhy{}test split module}
+          
+          \PY{l+s+sd}{https://towardsdatascience.com/train\PYZhy{}test\PYZhy{}split\PYZhy{}and\PYZhy{}cross\PYZhy{}validation\PYZhy{}in\PYZhy{}python\PYZhy{}80b61beca4b6}
+          
+          
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}167}]:} ' \textbackslash{}n\textbackslash{}nIN THE PHASE II OF THE PROJECT, WE WILL FOCUS ON TWO MORE IMPROVEMENTS\textbackslash{}n(a) train-test (b) feature combinations\textbackslash{}nInstead of fitting with all the data, here, we use the train-test split module\textbackslash{}n\textbackslash{}nhttps://towardsdatascience.com/train-test-split-and-cross-validation-in-python-80b61beca4b6\textbackslash{}n\textbackslash{}n\textbackslash{}n'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{c+c1}{\PYZsh{} Using train\PYZhy{}test split module}
+          
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{datasets}\PY{p}{,} \PY{n}{linear\PYZus{}model}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{import} \PY{n+nn}{csv} 
+          
+          
+          \PY{n}{SEEDS\PYZus{}DATA\PYZus{}URL} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/00236/seeds\PYZus{}dataset.txt}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{n}{seeds\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{SEEDS\PYZus{}DATA\PYZus{}URL}\PY{p}{,}\PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{s+}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Perimeter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Compactness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Width}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Asymmetry Coefft}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Kernel Groove Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{seeds\PYZus{}df}\PY{o}{.}\PY{n}{Target}
+          
+          \PY{c+c1}{\PYZsh{} create training and testing dataset}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{seeds\PYZus{}df}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.30}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{19}\PY{p}{)}
+          
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The shape of X\PYZus{}train \PYZam{} y\PYZus{}train are : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The shape of X\PYZus{}test \PYZam{} y\PYZus{}test are : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} fit a model}
+          \PY{n}{lr} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{prediction} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}  \PY{c+c1}{\PYZsh{} will output array with integer values.}
+          
+          \PY{c+c1}{\PYZsh{}display(preds)    }
+          \PY{c+c1}{\PYZsh{}display(\PYZdq{}The predicted dataset shape :\PYZdq{},prediction.shape)}
+          
+          
+          
+          \PY{n}{display}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ The actual dataset array :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The predicted dataset array :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{prediction}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} The line / model}
+          \PY{c+c1}{\PYZsh{}plt.scatter(y\PYZus{}test, preds)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{prediction}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markersize} \PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model Accuracy : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{100}\PY{o}{*}\PY{n}{lr}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          \PY{n}{np}\PY{o}{.}\PY{n}{savetxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output\PYZus{}1\PYZus{}individual\PYZus{}predictors.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{prediction}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                                          \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The shape of X\_train \& y\_train are :  (147, 8) (147,)
+The shape of X\_test \& y\_test are :  (63, 8) (63,)
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+' The actual dataset array :'
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+149    3
+96     2
+103    2
+132    2
+20     1
+151    3
+94     2
+117    2
+58     1
+131    2
+1      1
+83     2
+157    3
+89     2
+171    3
+34     1
+190    3
+173    3
+91     2
+31     1
+134    2
+13     1
+135    2
+16     1
+193    3
+119    2
+174    3
+95     2
+70     2
+37     1
+      ..
+179    3
+198    3
+90     2
+60     1
+64     1
+40     1
+33     1
+164    3
+30     1
+41     1
+26     1
+163    3
+8      1
+201    3
+156    3
+72     2
+87     2
+194    3
+7      1
+140    3
+62     1
+182    3
+145    3
+136    2
+14     1
+203    3
+178    3
+2      1
+115    2
+148    3
+Name: Target, dtype: int64
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+'The predicted dataset array :'
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+array([3, 2, 2, 2, 1, 3, 2, 2, 1, 2, 1, 2, 3, 2, 3, 1, 3, 3, 2, 1, 2, 1, 2,
+       1, 3, 2, 3, 2, 2, 1, 3, 3, 2, 3, 3, 2, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1,
+       3, 3, 2, 2, 3, 1, 3, 1, 3, 3, 2, 1, 3, 3, 1, 2, 3])
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model Accuracy :  100.0 \%
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{n}{Percentage\PYZus{}Training\PYZus{}Data} \PY{o}{=}      \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+          \PY{n}{Train\PYZus{}Test\PYZus{}Model\PYZus{}Prediction\PYZus{}Accuracy} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mf}{99.4}\PY{p}{,}\PY{l+m+mi}{97}\PY{p}{,}\PY{l+m+mf}{94.5}\PY{p}{,}\PY{l+m+mf}{75.7}\PY{p}{,}\PY{l+m+mf}{82.3}\PY{p}{,}\PY{l+m+mi}{64}\PY{p}{]}
+          
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Percentage\PYZus{}Training\PYZus{}Data}\PY{p}{,} \PY{n}{Train\PYZus{}Test\PYZus{}Model\PYZus{}Prediction\PYZus{}Accuracy}\PY{p}{,} 
+                              \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{solid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Seeds Dataset : Logistic Regression Model }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ 210 Instances; Multinomial Classification}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training\PYZus{}data Used for Modeling(}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{ Prediction accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{Percentage\PYZus{}Training\PYZus{}Data}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{450}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show} \PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{Above this instance, the seeds project \PYZhy{}phase 1 is done.  }
+          \PY{l+s+sd}{it is not complete but essential logic is accomplished to obtain model accuracy}
+          \PY{l+s+sd}{for a partial list of feature combinations.}
+          \PY{l+s+sd}{Here we are improving the calculations by taking into account }
+          \PY{l+s+sd}{ALL possible combinations of the features  [ N = 7 features; k = selected features]}
+          
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          
+          \PY{k+kn}{import} \PY{n+nn}{itertools}
+          
+          \PY{n}{combin\PYZus{}1} \PY{o}{=} \PY{n}{itertools}\PY{o}{.}\PY{n}{combinations}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Perimeter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Compactness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Asymmetry Coeff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KG length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{count\PYZus{}combin} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{combin\PYZus{}1}\PY{p}{:}
+              \PY{n}{count\PYZus{}combin}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{count\PYZus{}combin}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total number of combinations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{count\PYZus{}combin}\PY{p}{)}\PY{p}{)}
+          
+          
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{import} \PY{n+nn}{csv}
+          
+          \PY{k+kn}{import} \PY{n+nn}{itertools}
+          
+          
+          
+          \PY{n}{combin\PYZus{}1} \PY{o}{=} \PY{n}{itertools}\PY{o}{.}\PY{n}{combinations}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Perimeter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Compactness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Asymmetry Coeff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KG length}\PY{l+s+s1}{\PYZsq{}} \PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          
+          \PY{n}{count\PYZus{}combin} \PY{o}{=} \PY{p}{[} \PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{combin\PYZus{}1}\PY{p}{:}
+              \PY{n}{count\PYZus{}combin}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{count\PYZus{}combin}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{count\PYZus{}combin}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total number of combinations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{count\PYZus{}combin}\PY{p}{)}\PY{p}{)}
+          
+          
+          
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} }
+          \PY{l+s+sd}{new\PYZus{}prediction = np.zeros(210)}
+          
+          \PY{l+s+sd}{for i in range(new\PYZus{}length):}
+          \PY{l+s+sd}{    print (\PYZsq{}\PYZbs{}nthe new value of i is :\PYZsq{},i)}
+          \PY{l+s+sd}{    print( \PYZsq{}before the iteration, the feature is:\PYZsq{},count\PYZus{}combin[i] )}
+          \PY{l+s+sd}{    seeds\PYZus{}df[count\PYZus{}combin[i]].hist(bins=100)}
+          \PY{l+s+sd}{    X = seeds\PYZus{}df[[(count\PYZus{}combin[i])]]}
+          \PY{l+s+sd}{    y = seeds\PYZus{}df[\PYZsq{}Target\PYZsq{}]}
+          
+          \PY{l+s+sd}{    lr = LogisticRegression()}
+          \PY{l+s+sd}{    lr.fit(X, y)}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    plt.scatter(X,y)}
+          
+          \PY{l+s+sd}{    \PYZsh{}  How to get these individual plots rather than on the same graph}
+          \PY{l+s+sd}{\PYZsh{}  Also how to plot the logistic regression fit for these individual dataset ?}
+          \PY{l+s+sd}{  }
+          \PY{l+s+sd}{    plt.xlabel((count\PYZus{}combin[i]))}
+          \PY{l+s+sd}{    plt.ylabel(\PYZdq{}Target\PYZdq{})}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    preds = lr.predict(X)  \PYZsh{} will output array with integer values.}
+          \PY{l+s+sd}{    new\PYZus{}prediction = np.vstack([new\PYZus{}prediction,preds])  }
+          \PY{l+s+sd}{    print(\PYZsq{}after the iteration i =\PYZsq{},i)}
+          
+          
+          \PY{l+s+sd}{display(new\PYZus{}prediction)}
+          
+          \PY{l+s+sd}{np.savetxt(\PYZsq{}output\PYZus{}1\PYZus{}individual\PYZus{}predictors.csv\PYZsq{}, new\PYZus{}prediction.transpose(),}
+          \PY{l+s+sd}{                                           delimiter=\PYZsq{},\PYZsq{}, fmt=\PYZsq{}\PYZpc{}d\PYZsq{})}
+          \PY{l+s+sd}{                                           }
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1 ('Area', 'Perimeter')
+
+
+2 ('Area', 'Compactness')
+
+
+3 ('Area', 'Length')
+
+
+4 ('Area', 'Width')
+
+
+5 ('Area', 'Asymmetry Coeff')
+
+
+6 ('Area', 'KG length')
+
+
+7 ('Perimeter', 'Compactness')
+
+
+8 ('Perimeter', 'Length')
+
+
+9 ('Perimeter', 'Width')
+
+
+10 ('Perimeter', 'Asymmetry Coeff')
+
+
+11 ('Perimeter', 'KG length')
+
+
+12 ('Compactness', 'Length')
+
+
+13 ('Compactness', 'Width')
+
+
+14 ('Compactness', 'Asymmetry Coeff')
+
+
+15 ('Compactness', 'KG length')
+
+
+16 ('Length', 'Width')
+
+
+17 ('Length', 'Asymmetry Coeff')
+
+
+18 ('Length', 'KG length')
+
+
+19 ('Width', 'Asymmetry Coeff')
+
+
+20 ('Width', 'KG length')
+
+
+21 ('Asymmetry Coeff', 'KG length')
+
+
+Total number of combinations 21
+1 ('Area', 'Perimeter', 'Compactness')
+
+
+[('Area', 'Perimeter', 'Compactness')]
+2 ('Area', 'Perimeter', 'Length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length')]
+3 ('Area', 'Perimeter', 'Width')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width')]
+4 ('Area', 'Perimeter', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff')]
+5 ('Area', 'Perimeter', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length')]
+6 ('Area', 'Compactness', 'Length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length')]
+7 ('Area', 'Compactness', 'Width')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width')]
+8 ('Area', 'Compactness', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff')]
+9 ('Area', 'Compactness', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length')]
+10 ('Area', 'Length', 'Width')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width')]
+11 ('Area', 'Length', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff')]
+12 ('Area', 'Length', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length')]
+13 ('Area', 'Width', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff')]
+14 ('Area', 'Width', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length')]
+15 ('Area', 'Asymmetry Coeff', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length')]
+16 ('Perimeter', 'Compactness', 'Length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length')]
+17 ('Perimeter', 'Compactness', 'Width')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width')]
+18 ('Perimeter', 'Compactness', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff')]
+19 ('Perimeter', 'Compactness', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length')]
+20 ('Perimeter', 'Length', 'Width')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width')]
+21 ('Perimeter', 'Length', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff')]
+22 ('Perimeter', 'Length', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length')]
+23 ('Perimeter', 'Width', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff')]
+24 ('Perimeter', 'Width', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length')]
+25 ('Perimeter', 'Asymmetry Coeff', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length')]
+26 ('Compactness', 'Length', 'Width')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width')]
+27 ('Compactness', 'Length', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff')]
+28 ('Compactness', 'Length', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length')]
+29 ('Compactness', 'Width', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length'), ('Compactness', 'Width', 'Asymmetry Coeff')]
+30 ('Compactness', 'Width', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length'), ('Compactness', 'Width', 'Asymmetry Coeff'), ('Compactness', 'Width', 'KG length')]
+31 ('Compactness', 'Asymmetry Coeff', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length'), ('Compactness', 'Width', 'Asymmetry Coeff'), ('Compactness', 'Width', 'KG length'), ('Compactness', 'Asymmetry Coeff', 'KG length')]
+32 ('Length', 'Width', 'Asymmetry Coeff')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length'), ('Compactness', 'Width', 'Asymmetry Coeff'), ('Compactness', 'Width', 'KG length'), ('Compactness', 'Asymmetry Coeff', 'KG length'), ('Length', 'Width', 'Asymmetry Coeff')]
+33 ('Length', 'Width', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length'), ('Compactness', 'Width', 'Asymmetry Coeff'), ('Compactness', 'Width', 'KG length'), ('Compactness', 'Asymmetry Coeff', 'KG length'), ('Length', 'Width', 'Asymmetry Coeff'), ('Length', 'Width', 'KG length')]
+34 ('Length', 'Asymmetry Coeff', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length'), ('Compactness', 'Width', 'Asymmetry Coeff'), ('Compactness', 'Width', 'KG length'), ('Compactness', 'Asymmetry Coeff', 'KG length'), ('Length', 'Width', 'Asymmetry Coeff'), ('Length', 'Width', 'KG length'), ('Length', 'Asymmetry Coeff', 'KG length')]
+35 ('Width', 'Asymmetry Coeff', 'KG length')
+
+
+[('Area', 'Perimeter', 'Compactness'), ('Area', 'Perimeter', 'Length'), ('Area', 'Perimeter', 'Width'), ('Area', 'Perimeter', 'Asymmetry Coeff'), ('Area', 'Perimeter', 'KG length'), ('Area', 'Compactness', 'Length'), ('Area', 'Compactness', 'Width'), ('Area', 'Compactness', 'Asymmetry Coeff'), ('Area', 'Compactness', 'KG length'), ('Area', 'Length', 'Width'), ('Area', 'Length', 'Asymmetry Coeff'), ('Area', 'Length', 'KG length'), ('Area', 'Width', 'Asymmetry Coeff'), ('Area', 'Width', 'KG length'), ('Area', 'Asymmetry Coeff', 'KG length'), ('Perimeter', 'Compactness', 'Length'), ('Perimeter', 'Compactness', 'Width'), ('Perimeter', 'Compactness', 'Asymmetry Coeff'), ('Perimeter', 'Compactness', 'KG length'), ('Perimeter', 'Length', 'Width'), ('Perimeter', 'Length', 'Asymmetry Coeff'), ('Perimeter', 'Length', 'KG length'), ('Perimeter', 'Width', 'Asymmetry Coeff'), ('Perimeter', 'Width', 'KG length'), ('Perimeter', 'Asymmetry Coeff', 'KG length'), ('Compactness', 'Length', 'Width'), ('Compactness', 'Length', 'Asymmetry Coeff'), ('Compactness', 'Length', 'KG length'), ('Compactness', 'Width', 'Asymmetry Coeff'), ('Compactness', 'Width', 'KG length'), ('Compactness', 'Asymmetry Coeff', 'KG length'), ('Length', 'Width', 'Asymmetry Coeff'), ('Length', 'Width', 'KG length'), ('Length', 'Asymmetry Coeff', 'KG length'), ('Width', 'Asymmetry Coeff', 'KG length')]
+Total number of combinations 35
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}159}]:} ' \textbackslash{}nnew\_prediction = np.zeros(210)\textbackslash{}n\textbackslash{}nfor i in range(new\_length):\textbackslash{}n    print (\textbackslash{}'\textbackslash{}nthe new value of i is :\textbackslash{}',i)\textbackslash{}n    print( \textbackslash{}'before the iteration, the feature is:\textbackslash{}',count\_combin[i] )\textbackslash{}n    seeds\_df[count\_combin[i]].hist(bins=100)\textbackslash{}n    X = seeds\_df[[(count\_combin[i])]]\textbackslash{}n    y = seeds\_df[\textbackslash{}'Target\textbackslash{}']\textbackslash{}n\textbackslash{}n    lr = LogisticRegression()\textbackslash{}n    lr.fit(X, y)\textbackslash{}n    \textbackslash{}n    plt.scatter(X,y)\textbackslash{}n\textbackslash{}n    \#  How to get these individual plots rather than on the same graph\textbackslash{}n\#  Also how to plot the logistic regression fit for these individual dataset ?\textbackslash{}n  \textbackslash{}n    plt.xlabel((count\_combin[i]))\textbackslash{}n    plt.ylabel("Target")\textbackslash{}n    \textbackslash{}n    \textbackslash{}n    preds = lr.predict(X)  \# will output array with integer values.\textbackslash{}n    new\_prediction = np.vstack([new\_prediction,preds])  \textbackslash{}n    print(\textbackslash{}'after the iteration i =\textbackslash{}',i)\textbackslash{}n\textbackslash{}n\textbackslash{}ndisplay(new\_prediction)\textbackslash{}n\textbackslash{}nnp.savetxt(\textbackslash{}'output\_1\_individual\_predictors.csv\textbackslash{}', new\_prediction.transpose(),\textbackslash{}n                                           delimiter=\textbackslash{}',\textbackslash{}', fmt=\textbackslash{}'\%d\textbackslash{}')\textbackslash{}n                                           \textbackslash{}n'
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
